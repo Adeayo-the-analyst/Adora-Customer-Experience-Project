@@ -1,0 +1,1755 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.137.952.0 (24.10)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"customer_churn\",\"customer_feedback\",\"feature_usage\",\"total_prototypes_built\",\"total_credit_proxy\",\"onboarding\",\"support_tickets\",\"mapping_table_support_tickets\",\"mapped_feature_usage\",\"mapped_onboarding\",\"mapped_customer_feedback\",\"mapped_categories_customer_feedback\",\"successful_first_apps_built\",\"failed_apps_built\",\"production_ready\",\"high_customization\",\"errors\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "mapping_table_support_tickets",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\mapping_table_support_tickets.csv\"),[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Original\", type text}, {\"Corrected\", type text}})",
+          "in",
+          "    #\"Changed Type1\""
+        ],
+        "kind": "m",
+        "lineageTag": "ca09859e-cd83-4ead-87e9-6134a054141c"
+      },
+      {
+        "name": "mapped_feature_usage",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WcvRUCC5NT08tLsnMzytWitUBChUUKDiVZuakpBaB+c75KakKrhUF+UUlYL5bZnpuooJnLlzAPbPEozQJzAwuLUhMSixOBXNCMlJzgTpTMkvygSbFAgA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [corrected_feature_name = _t]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"corrected_feature_name\", type text}})",
+          "in",
+          "    #\"Changed Type\""
+        ],
+        "kind": "m",
+        "lineageTag": "dba7b2fe-a8de-4b88-8934-4da040692faa"
+      },
+      {
+        "name": "mapped_onboarding",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WckxRcE7MLUjMTM9TitWJVgpPTQLTQalpqUVFiTlgTnB+cmZijoJvakpmolJsLAA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [signup_channel = _t]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"signup_channel\", type text}})",
+          "in",
+          "    #\"Changed Type\""
+        ],
+        "kind": "m",
+        "lineageTag": "c5139a2e-e21a-42db-a6ce-39439cc66f91"
+      },
+      {
+        "name": "mapped_customer_feedback",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\mapped_customer_feedback.csv\"),[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Original\", type text}, {\"Corrected\", type text}})",
+          "in",
+          "    #\"Changed Type1\""
+        ],
+        "kind": "m",
+        "lineageTag": "52083061-2dd7-4d85-8365-ac06cdad68d4"
+      },
+      {
+        "name": "mapped_categories_customer_feedback",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\mapped_categories_customer_feedback.csv\"),[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}}),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Category\", type text}, {\"Feedback Text\", type text}}),",
+          "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type1\",{{\"Category\", \"feedback_text\"}, {\"Feedback Text\", \"category\"}})",
+          "in",
+          "    #\"Renamed Columns\""
+        ],
+        "kind": "m",
+        "lineageTag": "192afad2-774e-432c-9283-7f2df674675e"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "14209ab8-440b-447f-a219-4ec278a5f4a0",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "user_id",
+        "fromTable": "customer_churn",
+        "toColumn": "user_id",
+        "toTable": "total_prototypes_built"
+      },
+      {
+        "name": "15088e5e-b318-4066-a9a7-525d869830aa",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "user_id",
+        "fromTable": "customer_churn",
+        "toColumn": "user_id",
+        "toTable": "total_credit_proxy"
+      },
+      {
+        "name": "0e0e14d5-70af-4ba6-b055-ca9ceb1707ae",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "user_id",
+        "fromTable": "customer_churn",
+        "toColumn": "user_id",
+        "toTable": "successful_first_apps_built"
+      },
+      {
+        "name": "6c452728-72bb-44e3-a2a1-5f49b96b8e77",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "user_id",
+        "fromTable": "customer_churn",
+        "toColumn": "user_id",
+        "toTable": "failed_apps_built"
+      },
+      {
+        "name": "ffbb7055-9584-405b-a7b8-fa6a7f6efba3",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "user_id",
+        "fromTable": "customer_churn",
+        "toColumn": "user_id",
+        "toTable": "production_ready"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "customer_churn",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8c0f1f48-1cbd-4c72-a69b-8d6e79b1d1af",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "plan_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "22b1d6d2-fb5e-4a97-ad44-145c85cc5b0d",
+            "sourceColumn": "plan_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "usage_frequency",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e8060271-bd3f-4c1d-b428-b734d6fc2234",
+            "sourceColumn": "usage_frequency",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "support_contacts",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "206ba5d3-80ed-4459-b78e-52064664f6dd",
+            "sourceColumn": "support_contacts",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "churned_flag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f4e2fc13-246d-42ff-90ad-2c3f1f364262",
+            "sourceColumn": "churned_flag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_prototypes_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e348f72d-4164-410d-901c-0600f16a7d13",
+            "sourceColumn": "total_prototypes_built",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_credit_proxy",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "6f4a5241-b003-4650-b628-d59f630c368b",
+            "sourceColumn": "total_credit_proxy",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "successful_apps_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b834bc7f-0260-4341-a467-edaa34acc01b",
+            "sourceColumn": "successful_apps_built",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "failed_apps_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "58a349e8-7fd7-4e08-9d5f-e2a9d7554fa7",
+            "sourceColumn": "failed_apps_built",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "app_success_rate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "28eaeed8-c9a5-42e8-8121-75a45a4ad493",
+            "sourceColumn": "app_success_rate",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_production_deployments",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "52ebc944-a3d0-45d7-a57c-89288a9d9c23",
+            "sourceColumn": "total_production_deployments",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "0575a496-2d07-44e5-9e4e-cd6f1070b7ff",
+        "partitions": [
+          {
+            "name": "customer_churn",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\customer_churn (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"plan_type\", type text}, {\"usage_frequency\", Int64.Type}, {\"support_contacts\", Int64.Type}, {\"churned_flag\", Int64.Type}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Changed Type\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Renamed Columns\",-2,null,Replacer.ReplaceValue,{\"support_contacts\"}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Replaced Value\",-1,null,Replacer.ReplaceValue,{\"support_contacts\"}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Replaced Value1\", each true),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"user_id\"}, total_prototypes_built, {\"user_id\"}, \"total_prototypes_built\", JoinKind.LeftOuter),",
+                "    #\"Expanded total_prototypes_built\" = Table.ExpandTableColumn(#\"Merged Queries\", \"total_prototypes_built\", {\"total_prototypes_built\"}, {\"total_prototypes_built.total_prototypes_built\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Expanded total_prototypes_built\",{{\"total_prototypes_built.total_prototypes_built\", \"total_prototypes_built\"}}),",
+                "    #\"Merged Queries1\" = Table.NestedJoin(#\"Renamed Columns1\", {\"user_id\"}, total_credit_proxy, {\"user_id\"}, \"total_credit_proxy\", JoinKind.LeftOuter),",
+                "    #\"Expanded total_credit_proxy\" = Table.ExpandTableColumn(#\"Merged Queries1\", \"total_credit_proxy\", {\"total_credit_proxy\"}, {\"total_credit_proxy.total_credit_proxy\"}),",
+                "    #\"Merged Queries2\" = Table.NestedJoin(#\"Expanded total_credit_proxy\", {\"user_id\"}, successful_first_apps_built, {\"user_id\"}, \"successful_first_apps_built\", JoinKind.LeftOuter),",
+                "    #\"Expanded successful_first_apps_built\" = Table.ExpandTableColumn(#\"Merged Queries2\", \"successful_first_apps_built\", {\"successful_apps_built\"}, {\"successful_apps_built\"}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Expanded successful_first_apps_built\",{{\"total_credit_proxy.total_credit_proxy\", \"total_credit_proxy\"}}),",
+                "    #\"Merged Queries3\" = Table.NestedJoin(#\"Renamed Columns2\", {\"user_id\"}, failed_apps_built, {\"user_id\"}, \"failed_apps_built\", JoinKind.LeftOuter),",
+                "    #\"Expanded failed_apps_built\" = Table.ExpandTableColumn(#\"Merged Queries3\", \"failed_apps_built\", {\"failed_apps_built\"}, {\"failed_apps_built.1\"}),",
+                "    #\"Renamed Columns3\" = Table.RenameColumns(#\"Expanded failed_apps_built\",{{\"failed_apps_built.1\", \"failed_apps_built\"}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Renamed Columns3\", \"app_success_rate\", each if [total_prototypes_built] = 0 then null else [successful_apps_built] / [total_prototypes_built]),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"app_success_rate\", Percentage.Type}}),",
+                "    #\"Merged Queries4\" = Table.NestedJoin(#\"Changed Type2\", {\"user_id\"}, production_ready, {\"user_id\"}, \"production_ready\", JoinKind.LeftOuter),",
+                "    #\"Expanded production_ready\" = Table.ExpandTableColumn(#\"Merged Queries4\", \"production_ready\", {\"production_ready\"}, {\"production_ready.1\"}),",
+                "    #\"Renamed Columns4\" = Table.RenameColumns(#\"Expanded production_ready\",{{\"production_ready.1\", \"total_production_deployments\"}})",
+                "in",
+                "    #\"Renamed Columns4\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "customer_feedback",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "4f96ebbc-a667-404a-ba4a-858f25d77320",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "feedback_text",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3dbe56b4-7385-493d-8b7f-5600aa88f052",
+            "sourceColumn": "feedback_text",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Custom",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "064a3baf-5a3a-40e3-8077-268e5d61810e",
+            "sourceColumn": "Custom",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "sentiment_score",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "3812d383-a0e6-43bf-a6ca-a5233efd1e1f",
+            "sourceColumn": "sentiment_score",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "feedback_date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "7c32fc89-dac1-4d33-8a1c-6c2d044241d7",
+            "sourceColumn": "feedback_date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "feedback_time",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Time"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Time",
+            "lineageTag": "68faa3eb-2ac9-479e-96ff-a1b3f5c0c590",
+            "sourceColumn": "feedback_time",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "36c0aedd-ef2b-4dbc-9657-a6eb302a08dc",
+        "partitions": [
+          {
+            "name": "customer_feedback",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\customer_feedback (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feedback_text\", type text}, {\"sentiment_score\", type number}, {\"category\", type text}, {\"timestamp\", type datetime}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Changed Type\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Custom\", each if [feedback_text] = \"\" and [category] = \"\" then \"Remove\" else \"Keep\"),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Added Custom\", each ([Custom] = \"Keep\")),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Filtered Rows\",{\"Custom\"}),",
+                "    #\"Filtered Rows1\" = Table.SelectRows(#\"Removed Columns\", each true),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Filtered Rows1\",{\"user_id.1\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Columns1\", {\"user_id.2\"}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Removed Duplicates\", {\"feedback_text\"}, mapped_customer_feedback, {\"Original\"}, \"mapped_customer_feedback\", JoinKind.LeftOuter),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id.2\", \"feedback_text\", \"mapped_customer_feedback\", \"sentiment_score\", \"category\", \"timestamp\"}),",
+                "    #\"Expanded mapped_customer_feedback\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_customer_feedback\", {\"Corrected\"}, {\"mapped_customer_feedback.Corrected\"}),",
+                "    #\"Removed Duplicates1\" = Table.Distinct(#\"Expanded mapped_customer_feedback\", {\"user_id.2\"}),",
+                "    #\"Filtered Rows2\" = Table.SelectRows(#\"Removed Duplicates1\", each true),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Filtered Rows2\",{\"feedback_text\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns2\",{{\"mapped_customer_feedback.Corrected\", \"feedback_text\"}}),",
+                "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Renamed Columns\",{\"user_id.2\", \"feedback_text\", \"category\", \"sentiment_score\", \"timestamp\"}),",
+                "    #\"Filtered Rows3\" = Table.SelectRows(#\"Reordered Columns1\", each true),",
+                "    #\"Merged Queries1\" = Table.FuzzyNestedJoin(#\"Filtered Rows3\", {\"feedback_text\"}, mapped_categories_customer_feedback, {\"feedback_text\"}, \"mapped_categories_customer_feedback\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Expanded mapped_categories_customer_feedback\" = Table.ExpandTableColumn(#\"Merged Queries1\", \"mapped_categories_customer_feedback\", {\"category\"}, {\"mapped_categories_customer_feedback.category\"}),",
+                "    #\"Reordered Columns2\" = Table.ReorderColumns(#\"Expanded mapped_categories_customer_feedback\",{\"user_id.2\", \"feedback_text\", \"category\", \"mapped_categories_customer_feedback.category\", \"sentiment_score\", \"timestamp\"}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Reordered Columns2\", \"Custom\", each if [category] = \"\" then \"General\" else [category], type text),",
+                "    #\"Removed Columns3\" = Table.RemoveColumns(#\"Added Conditional Column\",{\"category\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns3\",{{\"mapped_categories_customer_feedback.category\", \"category\"}, {\"user_id.2\", \"user_id\"}}),",
+                "    #\"Removed Columns4\" = Table.RemoveColumns(#\"Renamed Columns1\",{\"category\"}),",
+                "    #\"Reordered Columns3\" = Table.ReorderColumns(#\"Removed Columns4\",{\"user_id\", \"feedback_text\", \"Custom\", \"sentiment_score\", \"timestamp\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Reordered Columns3\",{{\"sentiment_score\", Currency.Type}}),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Changed Type2\", \"timestamp\", \"timestamp - Copy\"),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Duplicated Column\",{{\"timestamp\", type date}, {\"timestamp - Copy\", type time}}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Changed Type3\",{{\"timestamp\", \"feedback_date\"}, {\"timestamp - Copy\", \"feedback_time\"}})",
+                "in",
+                "    #\"Renamed Columns2\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "feature_usage",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bb5aa091-f513-4592-b634-d2376e8ff06c",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "feature_usage",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "552e0cf7-b76a-4c70-b879-c6ffefafbc20",
+            "sourceColumn": "feature_usage",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "usage_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9e26b172-2f9b-4589-bf87-b6bc70de7b22",
+            "sourceColumn": "usage_count",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "session_duration",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2bc2f804-169d-48c4-927b-e5652e80fc0e",
+            "sourceColumn": "session_duration",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "errors",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d64c2489-fb5f-43cb-a89d-b8f95e8840ad",
+            "sourceColumn": "errors",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "production_ready_flag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e9ed724e-ee43-42f6-8bac-eeba0e96c690",
+            "sourceColumn": "production_ready_flag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "high_customization_flag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "fb6db1e7-a228-43ef-87c1-b0fcaa9324ea",
+            "sourceColumn": "high_customization_flag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "credit_proxy_score",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "e46d4a4f-1305-409f-a2a9-7aca3deac4d1",
+            "sourceColumn": "credit_proxy_score",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "prototype_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f955c2ec-2ded-4bf1-ac37-86b7057f8d93",
+            "sourceColumn": "prototype_built",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "failed_apps_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "59b6d189-8ec8-465d-a7ea-b4feb53b5883",
+            "sourceColumn": "failed_apps_built",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "279be595-a38a-4759-93e6-dd12793b461b",
+        "partitions": [
+          {
+            "name": "feature_usage",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"Custom\", each if [feature_usage] = \"App Builder\" and [errors] > 0 then 1 else 0),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Added Custom5\",{{\"Custom\", \"failed_apps_built\"}}),",
+                "    #\"Changed Type7\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"failed_apps_built\", type number}}),",
+                "    #\"Replaced Errors\" = Table.ReplaceErrorValues(#\"Changed Type7\", {{\"failed_apps_built\", null}})",
+                "in",
+                "    #\"Replaced Errors\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "total_prototypes_built",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "de4abd0a-fdd0-4130-97fc-d947dab176ce",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "total_prototypes_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a86806cf-bdb1-46d4-adf5-ad7c0b0e282d",
+            "sourceColumn": "total_prototypes_built",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "b641e2f5-852a-4381-bc91-30f2c81aa45a",
+        "partitions": [
+          {
+            "name": "total_prototypes_built",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Changed Type6\", {\"user_id\"}, {{\"total_prototypes_built\", each List.Sum([prototype_built]), type nullable number}}),",
+                "    #\"Filtered Rows1\" = Table.SelectRows(#\"Grouped Rows\", each true)",
+                "in",
+                "    #\"Filtered Rows1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "total_credit_proxy",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "663c388a-17b9-49ee-8977-9f8a055e6256",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "total_credit_proxy",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "091d8910-7754-46a5-8268-9c2696fc695a",
+            "sourceColumn": "total_credit_proxy",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "111171ce-cbd6-4d1c-af76-edb17baf4a31",
+        "partitions": [
+          {
+            "name": "total_credit_proxy",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Changed Type5\", {\"user_id\"}, {{\"total_credit_proxy\", each List.Sum([credit_proxy_score]), type nullable number}}),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Grouped Rows\",{{\"total_credit_proxy\", Currency.Type}})",
+                "in",
+                "    #\"Changed Type6\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "onboarding",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "60d77670-03ae-4bfc-85ba-d59450159ef6",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "signup_channel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "932a5318-b692-40de-92ed-fc6e07eb6a1e",
+            "sourceColumn": "signup_channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "activation_time_days",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "eda1cc8b-1071-4351-91d1-fc79fa903da3",
+            "sourceColumn": "activation_time_days",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "first_support_ticket",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7f464c90-562f-4738-92e0-94aeecf1389a",
+            "sourceColumn": "first_support_ticket",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "plan_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3785360d-a915-4f04-b929-b0ecb2edddb2",
+            "sourceColumn": "plan_type",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "90eb2972-ffd2-449c-b217-3b45d6a61d12",
+        "partitions": [
+          {
+            "name": "onboarding",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\onboarding (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"signup_channel\", type text}, {\"activation_time_days\", type number}, {\"first_support_ticket\", type logical}, {\"plan_type\", type text}}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Changed Type\", \"Custom\", each if [first_support_ticket] = false then 0 else if [first_support_ticket] = true then 1 else null, type number),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Added Conditional Column\",{\"user_id\", \"signup_channel\", \"activation_time_days\", \"first_support_ticket\", \"Custom\", \"plan_type\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Reordered Columns\",{\"first_support_ticket\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"Custom\", \"first_support_ticket\"}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Renamed Columns\", {\"signup_channel\"}, mapped_onboarding, {\"signup_channel\"}, \"mapped_onboarding\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"signup_channel\", \"mapped_onboarding\", \"activation_time_days\", \"first_support_ticket\", \"plan_type\"}),",
+                "    #\"Expanded mapped_onboarding\" = Table.ExpandTableColumn(#\"Reordered Columns1\", \"mapped_onboarding\", {\"signup_channel\"}, {\"mapped_onboarding.signup_channel\"}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Expanded mapped_onboarding\",{\"signup_channel\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"mapped_onboarding.signup_channel\", \"signup_channel\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns1\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Removed Columns2\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"activation_time_days\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type2\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "support_tickets",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ticket_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f186c239-3267-4010-8887-4636280d15f5",
+            "sourceColumn": "ticket_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "cc212f95-d136-4ad3-a061-384bca5eb719",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "issue_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "98b7fcc8-9b43-43c7-a8c8-bcbf23ce77b8",
+            "sourceColumn": "issue_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "response_time",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "10c1ce54-95fe-4702-99a7-310ade7ad503",
+            "sourceColumn": "response_time",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "resolution_time",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b071223b-1289-4260-b754-fa2d214c7bd4",
+            "sourceColumn": "resolution_time",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "satisfaction_rating",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6b9ea7d2-0c0f-4d2b-9857-7f13f5d4918f",
+            "sourceColumn": "satisfaction_rating",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "c32fe1ab-fe7e-4dcf-a531-d435ddb0fd50",
+        "partitions": [
+          {
+            "name": "support_tickets",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\support_tickets (1).csv\"),[Delimiter=\",\", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"ticket_id\", type text}, {\"user_id\", type text}, {\"issue_type\", type text}, {\"response_time\", type number}, {\"resolution_time\", type number}, {\"satisfaction_rating\", type number}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"issue_type\"}, mapping_table_support_tickets, {\"Original\"}, \"mapping_table_support_tickets\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Expanded mapping_table_support_tickets\" = Table.ExpandTableColumn(#\"Merged Queries\", \"mapping_table_support_tickets\", {\"Corrected\"}, {\"mapping_table_support_tickets.Corrected\"}),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Expanded mapping_table_support_tickets\",{\"ticket_id\", \"user_id\", \"issue_type\", \"mapping_table_support_tickets.Corrected\", \"response_time\", \"resolution_time\", \"satisfaction_rating\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Reordered Columns\", {\"ticket_id\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Removed Duplicates\",{\"issue_type\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapping_table_support_tickets.Corrected\", \"issue_type\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"ticket_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"ticket_id.1\", \"ticket_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"ticket_id.1\", type text}, {\"ticket_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"ticket_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"ticket_id.2\", \"ticket_id\"}}),",
+                "    #\"Split Column by Delimiter1\" = Table.SplitColumn(#\"Renamed Columns1\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Split Column by Delimiter1\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Changed Type2\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Removed Columns2\",{{\"user_id.2\", \"user_id\"}})",
+                "in",
+                "    #\"Renamed Columns2\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "successful_first_apps_built",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "064273b1-492c-45fd-9a49-e7ba6f6d31a4",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "successful_apps_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "4c204fd4-8e26-4029-a70f-9b9f2b19f442",
+            "sourceColumn": "successful_apps_built",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "a68e4153-d26a-4cd7-872d-3ff700490cff",
+        "partitions": [
+          {
+            "name": "successful_first_apps_built",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"first_app_success\", each if [feature_usage] = \"App Builder\" and [errors] = 0 then 1 else 0),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Added Custom5\", {\"user_id\"}, {{\"first_app_built\", each List.Sum([first_app_success]), type number}}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Grouped Rows\",{{\"first_app_built\", \"successful_apps_built\"}})",
+                "in",
+                "    #\"Renamed Columns2\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "failed_apps_built",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b5ba8b25-9089-4a82-991f-7779b8da4a3b",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "failed_apps_built",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c0c23360-1a27-4ad5-a164-b6f80036c593",
+            "sourceColumn": "failed_apps_built",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "5977830f-5f7f-4611-b285-d02d8f5a1c8b",
+        "partitions": [
+          {
+            "name": "failed_apps_built",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"Custom\", each if [feature_usage] = \"App Builder\" and [errors] > 0 then 1 else 0),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Added Custom5\",{{\"Custom\", \"failed_apps_built\"}}),",
+                "    #\"Changed Type7\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"failed_apps_built\", type number}}),",
+                "    #\"Replaced Errors\" = Table.ReplaceErrorValues(#\"Changed Type7\", {{\"failed_apps_built\", null}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Replaced Errors\", {\"user_id\"}, {{\"failed_apps_built\", each List.Sum([failed_apps_built]), type nullable number}}),",
+                "    #\"Filtered Rows1\" = Table.SelectRows(#\"Grouped Rows\", each true)",
+                "in",
+                "    #\"Filtered Rows1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "production_ready",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a7dcce92-5b0e-4c29-bd9a-5772d88f4d62",
+            "sourceColumn": "user_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "production_ready",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "80ed20c8-41fd-45ff-bddb-09b50d81222f",
+            "sourceColumn": "production_ready",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "1884d51a-eeb8-462a-ba46-cd390f2a03b3",
+        "partitions": [
+          {
+            "name": "production_ready",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"Custom\", each if [feature_usage] = \"App Builder\" and [errors] > 0 then 1 else 0),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Added Custom5\",{{\"Custom\", \"failed_apps_built\"}}),",
+                "    #\"Changed Type7\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"failed_apps_built\", type number}}),",
+                "    #\"Replaced Errors\" = Table.ReplaceErrorValues(#\"Changed Type7\", {{\"failed_apps_built\", null}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Replaced Errors\", {\"user_id\"}, {{\"production_ready\", each List.Sum([production_ready_flag]), type nullable number}})",
+                "in",
+                "    #\"Grouped Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "high_customization",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "36ee1f76-d17b-4c13-aff2-bc9834e2b9f9",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "high_customization",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "79ca1340-5e0b-4b8a-93be-42219dadc778",
+            "sourceColumn": "high_customization",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "d85b2e7f-0f09-4336-a311-8d28477b28a0",
+        "partitions": [
+          {
+            "name": "high_customization",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"Custom\", each if [feature_usage] = \"App Builder\" and [errors] > 0 then 1 else 0),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Added Custom5\",{{\"Custom\", \"failed_apps_built\"}}),",
+                "    #\"Changed Type7\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"failed_apps_built\", type number}}),",
+                "    #\"Replaced Errors\" = Table.ReplaceErrorValues(#\"Changed Type7\", {{\"failed_apps_built\", null}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Replaced Errors\", {\"user_id\"}, {{\"high_customization\", each List.Sum([high_customization_flag]), type nullable number}})",
+                "in",
+                "    #\"Grouped Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "errors",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "10e09230-a675-42a8-b70b-2c1a801cf9b2",
+            "sourceColumn": "user_id",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "errors",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8c729c1f-152c-424d-80a8-fad4496b45da",
+            "sourceColumn": "errors",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "2df4a8d9-a0ac-40ef-98de-062b4827bf5b",
+        "partitions": [
+          {
+            "name": "errors",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
+                "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"mapped_feature_usage.corrected_feature_name\", \"feature_usage\"}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Renamed Columns\", \"user_id\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"user_id.1\", \"user_id.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"user_id.1\", type text}, {\"user_id.2\", Int64.Type}}),",
+                "    #\"Removed Columns1\" = Table.RemoveColumns(#\"Changed Type1\",{\"user_id.1\"}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Removed Columns1\",{{\"user_id.2\", \"user_id\"}}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Renamed Columns1\", each true),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Custom\", each if [session_duration] > 60 then [session_duration] / 60 else [session_duration]),",
+                "    #\"Removed Columns2\" = Table.RemoveColumns(#\"Added Custom\",{\"Custom\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Removed Columns2\",{{\"session_duration\", Int64.Type}}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Changed Type2\", \"production_ready_flag\", each if [feature_usage] = \"Supabase\" or [feature_usage] = \"GitHub\" then 1 else 0),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"production_ready_flag\", Int64.Type}}),",
+                "    #\"Added Custom2\" = Table.AddColumn(#\"Changed Type3\", \"high_customization_flag\", each if [feature_usage] = \"Theme Editor\" or [feature_usage] = \"Figma Import\" then 1 else 0),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added Custom2\",{{\"high_customization_flag\", Int64.Type}}),",
+                "    #\"Added Custom3\" = Table.AddColumn(#\"Changed Type4\", \"credit_proxy_score\", each let ",
+                "weight = ",
+                "if [feature_usage] = \"App Builder\" then 5",
+                "else if [feature_usage] = \"AI Suggestions\" then 3",
+                "else if [feature_usage] = \"GitHub\" or [feature_usage] = \"Supabase\" or [feature_usage] = \"Code Export\" then 2",
+                "else 1 ",
+                "in (weight * [usage_count] / (1 + [errors]))),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added Custom3\",{{\"credit_proxy_score\", Currency.Type}}),",
+                "    #\"Added Custom4\" = Table.AddColumn(#\"Changed Type5\", \"prototype_built\", each if [feature_usage] = \"App Builder\" then 1 else 0),",
+                "    #\"Changed Type6\" = Table.TransformColumnTypes(#\"Added Custom4\",{{\"prototype_built\", Int64.Type}}),",
+                "    #\"Added Custom5\" = Table.AddColumn(#\"Changed Type6\", \"Custom\", each if [feature_usage] = \"App Builder\" and [errors] > 0 then 1 else 0),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Added Custom5\",{{\"Custom\", \"failed_apps_built\"}}),",
+                "    #\"Changed Type7\" = Table.TransformColumnTypes(#\"Renamed Columns2\",{{\"failed_apps_built\", type number}}),",
+                "    #\"Replaced Errors\" = Table.ReplaceErrorValues(#\"Changed Type7\", {{\"failed_apps_built\", null}}),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Replaced Errors\", {\"user_id\"}, {{\"errors\", each List.Sum([errors]), type nullable number}})",
+                "in",
+                "    #\"Grouped Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 444.1451541645061,
+            "y": 379.9337136665394
+          },
+          "nodeIndex": "customer_churn",
+          "nodeLineageTag": "0575a496-2d07-44e5-9e4e-cd6f1070b7ff",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1444.9323111991025,
+            "y": 558.99946205315359
+          },
+          "nodeIndex": "customer_feedback",
+          "nodeLineageTag": "36c0aedd-ef2b-4dbc-9657-a6eb302a08dc",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2594.8911698147085,
+            "y": 606.99946205315359
+          },
+          "nodeIndex": "errors",
+          "nodeLineageTag": "2df4a8d9-a0ac-40ef-98de-062b4827bf5b",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "failed_apps_built",
+          "nodeLineageTag": "5977830f-5f7f-4611-b285-d02d8f5a1c8b",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1061.6126916605672,
+            "y": 520.99946205315359
+          },
+          "nodeIndex": "feature_usage",
+          "nodeLineageTag": "279be595-a38a-4759-93e6-dd12793b461b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2978.2107893532439,
+            "y": 606.99946205315359
+          },
+          "nodeIndex": "high_customization",
+          "nodeLineageTag": "d85b2e7f-0f09-4336-a311-8d28477b28a0",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2211.5715502761732,
+            "y": 570.99946205315359
+          },
+          "nodeIndex": "onboarding",
+          "nodeLineageTag": "90eb2972-ffd2-449c-b217-3b45d6a61d12",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 678.29307212203184,
+            "y": 233.068376711972
+          },
+          "nodeIndex": "production_ready",
+          "nodeLineageTag": "1884d51a-eeb8-462a-ba46-cd390f2a03b3",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 376.83935598878725,
+            "y": 111.85839109567735
+          },
+          "nodeIndex": "successful_first_apps_built",
+          "nodeLineageTag": "a68e4153-d26a-4cd7-872d-3ff700490cff",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1828.2519307376378,
+            "y": 558.99946205315359
+          },
+          "nodeIndex": "support_tickets",
+          "nodeLineageTag": "c32fe1ab-fe7e-4dcf-a531-d435ddb0fd50",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 168.39422707816055,
+            "y": 361.10559829641113
+          },
+          "nodeIndex": "total_credit_proxy",
+          "nodeLineageTag": "111171ce-cbd6-4d1c-af76-edb17baf4a31",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 172.09374443163426,
+            "y": 822.77306965532671
+          },
+          "nodeIndex": "total_prototypes_built",
+          "nodeLineageTag": "b641e2f5-852a-4381-bc91-30f2c81aa45a",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
