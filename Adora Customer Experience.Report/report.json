@@ -25,7 +25,53 @@
       "filters": "[]",
       "height": 720.00,
       "name": "8e3e980ff8be7bd909fb",
-      "visualContainers": [],
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"188ab6010b9a0c8a335b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1000,\"y\":80,\"width\":280,\"height\":272,\"z\":4,\"tabOrder\":4}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Duplicate Count\"},{\"queryRef\":\"Table.Duplicate Count\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"},\"Name\":\"Table.Duplicate Count\",\"NativeReferenceName\":\"Duplicate Count\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 280.00,
+          "x": 1000.00,
+          "y": 80.00,
+          "z": 4.00
+        },
+        {
+          "config": "{\"name\":\"500964e36e6afd2fc3e0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":368,\"y\":368,\"z\":3,\"width\":640,\"height\":272,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Failed Sessions\"},{\"queryRef\":\"Table.Total Sessions\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"},\"Name\":\"Table.Total Failed Sessions\",\"NativeReferenceName\":\"Total Failed Sessions\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Sessions\"},\"Name\":\"Table.Total Sessions\",\"NativeReferenceName\":\"Total Sessions\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 640.00,
+          "x": 368.00,
+          "y": 368.00,
+          "z": 3.00
+        },
+        {
+          "config": "{\"name\":\"60c78359ed5174852709\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":80,\"z\":0,\"width\":288,\"height\":272,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"},\"Name\":\"Table.Total Customers\",\"NativeReferenceName\":\"Total Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 288.00,
+          "x": 64.00,
+          "y": 80.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"6f08a21452121e52b8bf\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":362,\"width\":288,\"height\":272,\"z\":1,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Churned Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"},\"Name\":\"Table.Churned Customers\",\"NativeReferenceName\":\"Churned Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 288.00,
+          "x": 64.00,
+          "y": 362.00,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"89f82436b48cd64d0bb0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":362,\"y\":80,\"width\":288,\"height\":272,\"z\":2,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Retention Rate\"},{\"queryRef\":\"Table.Retention Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"},\"Name\":\"Table.Retention Rate\",\"NativeReferenceName\":\"Retention Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 288.00,
+          "x": 362.00,
+          "y": 80.00,
+          "z": 2.00
+        }
+      ],
       "width": 1280.00
     }
   ]
