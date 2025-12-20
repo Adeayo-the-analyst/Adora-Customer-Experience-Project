@@ -143,13 +143,12 @@
             "x": 2385.9041927668331,
             "y": 511.78022334739688
           },
-          "nodeIndex": "Table",
-          "nodeLineageTag": "3cd388fc-7005-4a26-8d94-f6b853223342",
+          "nodeIndex": "_Measures",
           "size": {
             "height": 200,
             "width": 234
           },
-          "zIndex": 2
+          "zIndex": 0
         }
       ],
       "name": "All tables",

@@ -1,5 +1,5 @@
 {
-  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.59\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.59\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
   "layoutOptimization": 0,
   "resourcePackages": [
     {
@@ -27,25 +27,43 @@
       "name": "8e3e980ff8be7bd909fb",
       "visualContainers": [
         {
-          "config": "{\"name\":\"188ab6010b9a0c8a335b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1000,\"y\":80,\"width\":280,\"height\":272,\"z\":4,\"tabOrder\":4}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Duplicate Count\"},{\"queryRef\":\"Table.Duplicate Count\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"},\"Name\":\"Table.Duplicate Count\",\"NativeReferenceName\":\"Duplicate Count\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"188ab6010b9a0c8a335b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1000,\"y\":80,\"width\":280,\"height\":272,\"z\":4000,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Duplicate Count\"},{\"queryRef\":\"Table.Duplicate Count\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"},\"Name\":\"Table.Duplicate Count\",\"NativeReferenceName\":\"Duplicate Count\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Duplicate Count\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 272.00,
           "width": 280.00,
           "x": 1000.00,
           "y": 80.00,
-          "z": 4.00
+          "z": 4000.00
         },
         {
-          "config": "{\"name\":\"500964e36e6afd2fc3e0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":368,\"y\":368,\"z\":3,\"width\":640,\"height\":272,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Failed Sessions\"},{\"queryRef\":\"Table.Total Sessions\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"},\"Name\":\"Table.Total Failed Sessions\",\"NativeReferenceName\":\"Total Failed Sessions\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Sessions\"},\"Name\":\"Table.Total Sessions\",\"NativeReferenceName\":\"Total Sessions\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"4679382fd52251bb66b4\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":128,\"z\":4005,\"width\":752,\"height\":528,\"tabOrder\":4005}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"customer_churn.total_sessions\",\"active\":true}],\"Series\":[{\"queryRef\":\"customer_churn.friction_level\"}],\"Y\":[{\"queryRef\":\"_Measures.Churn Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"total_sessions\"},\"Name\":\"customer_churn.total_sessions\",\"NativeReferenceName\":\"total_sessions\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"friction_level\"},\"Name\":\"customer_churn.friction_level\",\"NativeReferenceName\":\"friction_level\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churn Rate\"},\"Name\":\"_Measures.Churn Rate\",\"NativeReferenceName\":\"Churn Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churn Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[{\"name\":\"dc08cce8bc9b0e5d5a40\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"customer_churn\"}},\"Property\":\"friction_level\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"friction_level\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 528.00,
+          "width": 752.00,
+          "x": 0.00,
+          "y": 128.00,
+          "z": 4005.00
+        },
+        {
+          "config": "{\"name\":\"500964e36e6afd2fc3e0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":368,\"y\":368,\"z\":3000,\"width\":640,\"height\":272,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Failed Sessions\"},{\"queryRef\":\"Table.Total Sessions\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"},\"Name\":\"Table.Total Failed Sessions\",\"NativeReferenceName\":\"Total Failed Sessions\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Sessions\"},\"Name\":\"Table.Total Sessions\",\"NativeReferenceName\":\"Total Sessions\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Failed Sessions\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 272.00,
           "width": 640.00,
           "x": 368.00,
           "y": 368.00,
-          "z": 3.00
+          "z": 3000.00
         },
         {
-          "config": "{\"name\":\"60c78359ed5174852709\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":80,\"z\":0,\"width\":288,\"height\":272,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"},\"Name\":\"Table.Total Customers\",\"NativeReferenceName\":\"Total Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"582908fc888b1d31c229\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1008,\"y\":368,\"width\":272,\"height\":272,\"z\":4002,\"tabOrder\":4002}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"Table.Users with Failures Who Churned\"},{\"queryRef\":\"Table.Users with Failures Who Churned\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Users with Failures Who Churned\"},\"Name\":\"Table.Users with Failures Who Churned\",\"NativeReferenceName\":\"Users with Failures Who Churned\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Users with Failures Who Churned\"}}}]},\"autoSelectVisualType\":true,\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 272.00,
+          "width": 272.00,
+          "x": 1008.00,
+          "y": 368.00,
+          "z": 4002.00
+        },
+        {
+          "config": "{\"name\":\"60c78359ed5174852709\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":80,\"z\":0,\"width\":288,\"height\":272,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Total Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"},\"Name\":\"Table.Total Customers\",\"NativeReferenceName\":\"Total Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Total Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 272.00,
           "width": 288.00,
@@ -54,22 +72,49 @@
           "z": 0.00
         },
         {
-          "config": "{\"name\":\"6f08a21452121e52b8bf\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":362,\"width\":288,\"height\":272,\"z\":1,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Churned Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"},\"Name\":\"Table.Churned Customers\",\"NativeReferenceName\":\"Churned Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"6f08a21452121e52b8bf\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64,\"y\":362,\"width\":288,\"height\":272,\"z\":1000,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Churned Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"},\"Name\":\"Table.Churned Customers\",\"NativeReferenceName\":\"Churned Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Churned Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 272.00,
           "width": 288.00,
           "x": 64.00,
           "y": 362.00,
-          "z": 1.00
+          "z": 1000.00
         },
         {
-          "config": "{\"name\":\"89f82436b48cd64d0bb0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":362,\"y\":80,\"width\":288,\"height\":272,\"z\":2,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Retention Rate\"},{\"queryRef\":\"Table.Retention Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"},\"Name\":\"Table.Retention Rate\",\"NativeReferenceName\":\"Retention Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"89f82436b48cd64d0bb0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":362,\"y\":80,\"width\":288,\"height\":272,\"z\":2000,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"Table.Retention Rate\"},{\"queryRef\":\"Table.Retention Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"},\"Name\":\"Table.Retention Rate\",\"NativeReferenceName\":\"Retention Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Retention Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 272.00,
           "width": 288.00,
           "x": 362.00,
           "y": 80.00,
-          "z": 2.00
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"b68390659fcefd6f0563\",\"layouts\":[{\"id\":0,\"position\":{\"x\":48,\"y\":80,\"z\":4004,\"width\":1120,\"height\":608,\"tabOrder\":4004}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Y\":[{\"queryRef\":\"_Measures.Churn Rate\"}],\"Category\":[{\"queryRef\":\"customer_churn.total_sessions\",\"active\":true}],\"Series\":[{\"queryRef\":\"customer_churn.Persona\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churn Rate\"},\"Name\":\"_Measures.Churn Rate\",\"NativeReferenceName\":\"Churn Rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"total_sessions\"},\"Name\":\"customer_churn.total_sessions\",\"NativeReferenceName\":\"total_sessions\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Persona\"},\"Name\":\"customer_churn.Persona\",\"NativeReferenceName\":\"Persona\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churn Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[{\"name\":\"a7b11420f33b4405c260\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"customer_churn\"}},\"Property\":\"friction_level\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"friction_level\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Broken'\"}}],[{\"Literal\":{\"Value\":\"'Flawless'\"}}],[{\"Literal\":{\"Value\":\"'Low Friction'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]},\"isHiddenInViewMode\":false}]",
+          "height": 608.00,
+          "width": 1120.00,
+          "x": 48.00,
+          "y": 80.00,
+          "z": 4004.00
+        },
+        {
+          "config": "{\"name\":\"c259f0c6d7cc0d03b24c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":128,\"y\":64,\"z\":4001,\"width\":720,\"height\":432,\"tabOrder\":4001}}],\"singleVisual\":{\"visualType\":\"barChart\",\"projections\":{\"Category\":[{\"queryRef\":\"customer_churn.Persona\",\"active\":true}],\"Y\":[{\"queryRef\":\"_Measures.Churned Customers\"},{\"queryRef\":\"_Measures.Active Customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Persona\"},\"Name\":\"customer_churn.Persona\",\"NativeReferenceName\":\"Persona\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churned Customers\"},\"Name\":\"_Measures.Churned Customers\",\"NativeReferenceName\":\"Churned Customers\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Active Customers\"},\"Name\":\"_Measures.Active Customers\",\"NativeReferenceName\":\"Active Customers\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Churned Customers\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[{\"name\":\"7237a98bfd1926f911f6\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"customer_churn\"}},\"Property\":\"friction_level\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"customer_churn\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"friction_level\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Low Friction'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 432.00,
+          "width": 720.00,
+          "x": 128.00,
+          "y": 64.00,
+          "z": 4001.00
+        },
+        {
+          "config": "{\"name\":\"d06e92e2394fdc69cb6a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":624,\"y\":416,\"z\":4003,\"width\":304,\"height\":304,\"tabOrder\":4003}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"Table.Churned Users With Zero Errors\"},{\"queryRef\":\"Table.Users with No Failures\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Users without Failures But Churned\"},\"Name\":\"Table.Churned Users With Zero Errors\",\"NativeReferenceName\":\"Users without Failures But Churned\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Users with No Failures\"},\"Name\":\"Table.Users with No Failures\",\"NativeReferenceName\":\"Users with No Failures\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Users without Failures But Churned\"}}}]},\"autoSelectVisualType\":true,\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 304.00,
+          "width": 304.00,
+          "x": 624.00,
+          "y": 416.00,
+          "z": 4003.00
         }
       ],
       "width": 1280.00
