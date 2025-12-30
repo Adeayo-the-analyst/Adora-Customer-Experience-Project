@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 1393.6746845701118,
-        "y": 838.41140409178513
+        "x": 713.11475409836066,
+        "y": 837.70491803278685
       },
       "nodes": [
         {
@@ -149,32 +149,6 @@
             "width": 234
           },
           "zIndex": 1
-        },
-        {
-          "location": {
-            "x": 1866.3722958293636,
-            "y": 0
-          },
-          "nodeIndex": "operations",
-          "nodeLineageTag": "faa1fa3d-54a9-4009-a23a-17a0c5923de8",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 2290.6063621792159,
-            "y": 0
-          },
-          "nodeIndex": "product",
-          "nodeLineageTag": "5abdc67b-55af-40cb-820f-e1ced6b978bf",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
         }
       ],
       "name": "All tables",
