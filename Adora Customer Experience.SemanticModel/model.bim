@@ -3245,6 +3245,45 @@
             "lineageTag": "ad5cd131-b1f3-4dec-bd08-f61349641243",
             "sourceColumn": "feature_usage_id",
             "summarizeBy": "none"
+          },
+          {
+            "name": "FailedSessionFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": "IF([errors] > 0, 1,0)",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "5b7aac7d-2ff5-4a72-b9c3-763892cac785",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "frustration_level",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "SWITCH (",
+              "    TRUE(),",
+              "    [FailedSessionFlag] = 0, \"Clean\",",
+              "    [FailedSessionFlag] = 1 && [errors] = [usage_count], \"System Breakdown\",",
+              "    [FailedSessionFlag] = 1, \"Minor Failure\"",
+              ")"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "76562e53-ca0a-4a83-891c-3c4a08aec563",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "279be595-a38a-4759-93e6-dd12793b461b",
