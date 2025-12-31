@@ -172,7 +172,9 @@
           "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
           "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
           "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
-          "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+          "    #\"Filtered Rows1\" = Table.SelectRows(#\"Changed Type\", each ([usage_count] <> null and [usage_count] <> 0) and ([session_duration] <> null)),",
+          "    #\"Replaced Value\" = Table.ReplaceValue(#\"Filtered Rows1\",null,0,Replacer.ReplaceValue,{\"errors\"}),",
+          "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Replaced Value\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
           "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
           "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
           "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
@@ -348,7 +350,9 @@
           "    #\"Changed Type28\" = Table.TransformColumnTypes(#\"Added Conditional Column5\",{{\"failed_session\", Int64.Type}}),",
           "    #\"Reordered Columns22\" = Table.ReorderColumns(#\"Changed Type28\",{\"user_id\", \"feature_usage_id\", \"usage_count\", \"session_duration\", \"errors\", \"effective_failed\", \"failed_session\", \"meaningful_session\", \"short_session\", \"AI_use\", \"successful_AI_use_sessions \", \"failed_AI_use_sessions \", \"AI_use_short_session\", \"successful_AI_short_session\", \"failed_AI_use_short_session \", \"AI_meaningful_session\", \"failed_AI_meaningful_sessions\", \"successful_AI_use_meaningful_sessions\", \"app_build_attempts\", \"successful_app_builds\", \"app_build_short_session\", \"successful_app_short_sessions\", \"failed_app_short_sessions\", \"app_build_meaningful_session\", \"failed_app_meaningful_session\", \"successful_app_meaningful_sessions\", \"code_export\", \"code_export_sucessful_sessions\", \"code_export_failed_sessions\", \"code_export_meaningful_session\", \"code_export_successful_meaningful_session\", \"code_export_failed_meaningful_sessions\", \"code_export_short_session\", \"code_export_successful_short_session\", \"code_export_failed_short_sessions\", \"deployment\", \"successful_deployment\", \"failed_deployment\", \"deployment_short_session\", \"deployment_successful_short_session\", \"deployment_failed_short_session\", \"deployment_meaningful_session\", \"deployment_successful_meaningful_session\", \"deployment_failed_meaningful_session\", \"design\", \"design_short_session\", \"design_meaningful_session\", \"failed_designs\", \"successful_designs\", \"successful_design_meaningful_session\", \"failed_design_meaningful_session\", \"successful_design_short_session\", \"failed_design_short_session\", \"failed_app_builds\"}),",
           "    #\"Added Conditional Column6\" = Table.AddColumn(#\"Reordered Columns22\", \"successful_session\", each if [effective_failed] = null then null else if [effective_failed] = 0 then 1 else 0),",
-          "    #\"Changed Type29\" = Table.TransformColumnTypes(#\"Added Conditional Column6\",{{\"successful_session\", Int64.Type}}),",
+          "    #\"Added Conditional Column7\" = Table.AddColumn(#\"Added Conditional Column6\", \"frustration_level\", each if [failed_session] = 1 then \"Frustrated\" else \"Calm\"),",
+          "    #\"Added Custom43\" = Table.AddColumn(#\"Added Conditional Column7\", \"friction_level\", each if [effective_failed] = 0 then\"Flawless\" else if [effective_failed] >= 1 and [effective_failed] <= 3 then \"Low Friction\" else if [effective_failed] >= 4 and [effective_failed] <= 9 then \"High Friction\" else if [effective_failed] >= 10 then \"Broken\" else \"N/A\"),",
+          "    #\"Changed Type29\" = Table.TransformColumnTypes(#\"Added Custom43\",{{\"successful_session\", Int64.Type}}),",
           "    #\"Reordered Columns23\" = Table.ReorderColumns(#\"Changed Type29\",{\"user_id\", \"feature_usage_id\", \"usage_count\", \"session_duration\", \"errors\", \"effective_failed\", \"failed_session\", \"successful_session\", \"meaningful_session\", \"short_session\", \"AI_use\", \"successful_AI_use_sessions \", \"failed_AI_use_sessions \", \"AI_use_short_session\", \"successful_AI_short_session\", \"failed_AI_use_short_session \", \"AI_meaningful_session\", \"failed_AI_meaningful_sessions\", \"successful_AI_use_meaningful_sessions\", \"app_build_attempts\", \"successful_app_builds\", \"app_build_short_session\", \"successful_app_short_sessions\", \"failed_app_short_sessions\", \"app_build_meaningful_session\", \"failed_app_meaningful_session\", \"successful_app_meaningful_sessions\", \"code_export\", \"code_export_sucessful_sessions\", \"code_export_failed_sessions\", \"code_export_meaningful_session\", \"code_export_successful_meaningful_session\", \"code_export_failed_meaningful_sessions\", \"code_export_short_session\", \"code_export_successful_short_session\", \"code_export_failed_short_sessions\", \"deployment\", \"successful_deployment\", \"failed_deployment\", \"deployment_short_session\", \"deployment_successful_short_session\", \"deployment_failed_short_session\", \"deployment_meaningful_session\", \"deployment_successful_meaningful_session\", \"deployment_failed_meaningful_session\", \"design\", \"design_short_session\", \"design_meaningful_session\", \"failed_designs\", \"successful_designs\", \"successful_design_meaningful_session\", \"failed_design_meaningful_session\", \"successful_design_short_session\", \"failed_design_short_session\", \"failed_app_builds\"}),",
           "    #\"Merged Queries3\" = Table.NestedJoin(#\"Reordered Columns23\", {\"user_id\", \"feature_usage_id\", \"usage_count\", \"session_duration\", \"errors\"}, feature_usage, {\"user_id\", \"feature_usage_id\", \"usage_count\", \"session_duration\", \"errors\"}, \"feature_usage\", JoinKind.LeftOuter),",
           "    #\"Expanded feature_usage1\" = Table.ExpandTableColumn(#\"Merged Queries3\", \"feature_usage\", {\"credit_proxy_score\"}, {\"credit_proxy_score\"}),",
@@ -372,9 +376,15 @@
           "    #\"Inserted Division\" = Table.AddColumn(#\"Rounded Off1\", \"meaningful_session_ratio\", each [total_meaningful_sessions] / [total_sessions], type number),",
           "    #\"Rounded Off2\" = Table.TransformColumns(#\"Inserted Division\",{{\"meaningful_session_ratio\", each Number.Round(_, 2), type number}}),",
           "    #\"Inserted Division1\" = Table.AddColumn(#\"Rounded Off2\", \"short_session_ratio\", each [total_short_sessions] / [total_sessions], type number),",
-          "    #\"Rounded Off3\" = Table.TransformColumns(#\"Inserted Division1\",{{\"short_session_ratio\", each Number.Round(_, 2), type number}})",
+          "    #\"Rounded Off3\" = Table.TransformColumns(#\"Inserted Division1\",{{\"short_session_ratio\", each Number.Round(_, 2), type number}}),",
+          "    #\"Inserted Division2\" = Table.AddColumn(#\"Rounded Off3\", \"success_rate\", each [total_successful_sessions] / [total_sessions], type number),",
+          "    #\"Rounded Off4\" = Table.TransformColumns(#\"Inserted Division2\",{{\"success_rate\", each Number.Round(_, 2), type number}}),",
+          "    #\"Added Custom44\" = Table.AddColumn(#\"Rounded Off4\", \"experience_level\", each if [success_rate] = 1 then \"Flawless\" else if [success_rate] >= 0.75 and [success_rate] <= 0.99 then \"Mostly Successful\" else if [success_rate] >= 0.5 and [success_rate] <= 0.74 then \"Mixed\" else if [success_rate] >= 0.25 and [success_rate] <= 0.49 then \"High Friction\" else if [success_rate] >= 0 and [success_rate] <= 0.24 then \"Failed\" else \"N/A\"),",
+          "    #\"Inserted Division3\" = Table.AddColumn(#\"Added Custom44\", \"friction_ratio\", each [total_effective_failed] / [total_sessions], type number),",
+          "    #\"Rounded Off5\" = Table.TransformColumns(#\"Inserted Division3\",{{\"friction_ratio\", each Number.Round(_, 2), type number}}),",
+          "    #\"Added Custom45\" = Table.AddColumn(#\"Rounded Off5\", \"friction_level\", each if [friction_ratio]= 0 then \"Flawless\" else if [friction_ratio] > 0 and [friction_ratio] <= 1 then \"Low Friction\" else if [friction_ratio] > 1 and [friction_ratio] <= 3 then \"High Friction\" else if [friction_ratio] > 3 then \"System Breakdown\" else \"N/A\")",
           "in",
-          "    #\"Rounded Off3\""
+          "    #\"Added Custom45\""
         ],
         "kind": "m",
         "lineageTag": "8b05f654-97ad-4578-8813-dfbe7120ca4f"
@@ -1763,23 +1773,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "fail_rate",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "dataType": "int64",
-            "lineageTag": "ec3ddec0-05f5-400e-881e-d90cc1b7dca8",
-            "sourceColumn": "fail_rate",
-            "summarizeBy": "sum"
-          },
-          {
             "name": "success_rate",
             "annotations": [
               {
@@ -1791,23 +1784,9 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "dataType": "int64",
+            "dataType": "double",
             "lineageTag": "b398a8ce-e0d5-4a76-bba3-36476723c7b6",
             "sourceColumn": "success_rate",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "error_rate",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "a6f5864f-9eb1-4103-80c1-fea875fa42f4",
-            "sourceColumn": "error_rate",
             "summarizeBy": "sum"
           },
           {
@@ -1821,19 +1800,6 @@
             "dataType": "string",
             "lineageTag": "563273ae-aa35-46de-afe2-4afe9c79f1c5",
             "sourceColumn": "friction_level",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "frustration_level",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "ca3f462a-d19b-4b11-b09e-b69d59def9b1",
-            "sourceColumn": "frustration_level",
             "summarizeBy": "none"
           },
           {
@@ -2824,6 +2790,36 @@
             "lineageTag": "ba20a6f8-d612-4fa5-9c2c-1528600155a4",
             "sourceColumn": "onboarding_status",
             "summarizeBy": "none"
+          },
+          {
+            "name": "experience_level",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c8ed2a31-c4c0-4470-a4ab-85093abffce0",
+            "sourceColumn": "experience_level",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "friction_ratio",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3a1f421d-0b52-4047-964f-672f4f98a548",
+            "sourceColumn": "friction_ratio",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "0575a496-2d07-44e5-9e4e-cd6f1070b7ff",
@@ -2858,7 +2854,7 @@
                 "else if [support_contacts] >= 6 and [support_contacts] <= 8 then \"Black Hole\"",
                 "else \"Out of Range\"),",
                 "    #\"Merged Queries2\" = Table.NestedJoin(#\"Added Custom\", {\"user_id\"}, product, {\"user_id\"}, \"product\", JoinKind.LeftOuter),",
-                "    #\"Expanded product\" = Table.ExpandTableColumn(#\"Merged Queries2\", \"product\", {\"total_sessions\", \"total_usage_count\", \"total_session_duration\", \"average_session_duration\", \"min_session_duration\", \"max_session_duration\", \"total_errors\", \"total_effective_failed\", \"total_failed_sessions\", \"total_successful_sessions\", \"total_meaningful_sessions\", \"total_successful_meaningful_sessions\", \"total_failed_meaningful_sessions\", \"total_short_sessions\", \"total_failed_short_sessions\", \"total_successful_short_sessions\", \"total_AI_use\", \"total_successful_AI_use_sessions\", \"total_failed_AI_use_sessions\", \"total_AI_use_short_sessions\", \"total_successful_AI_short_sessions\", \"total_failed_AI_use_short_sessions\", \"total_AI_use_meaningful_sessions\", \"total_failed_AI_meaningful_short_sessions\", \"total_successful_AI_use_meaningful_sessions\", \"total_app_build_attempts\", \"total_successful_app_builds\", \"total_failed_app_builds\", \"total_app_build_short_session\", \"total_successful_app_short_sessions\", \"total_failed_app_short_sessions\", \"total_app_build_meaningful_sessions\", \"total_failed_app_meaningful_sessions\", \"total_successful_app_meaningful_sessions\", \"total_code_exports\", \"total_code_export_successful_sessions\", \"total_failed_code_export_sessions\", \"total_code_export_meaningful_sessions\", \"total_code_export_successful_meaningful_sessions\", \"total_code_export_failed_meaningful_sessions\", \"total_code_export_short_sessions\", \"total_code_export_successful_short_sessions\", \"total_code_export_failed_short_sessions\", \"total_deployments\", \"total_successful_deployments\", \"total_failed_deployments\", \"total_deployment_short_sessions\", \"total_deployment_successful_sessions\", \"total_deployment_failed_short_sessions\", \"total_meaningful_deployment_sessions\", \"total_successful_meaningful_deployment_sessions\", \"total_failed_meaningful_deployment_sessions\", \"total_designs\", \"total_designs_short_sessions\", \"total_design_meaningful_sessions\", \"total_failed_designs\", \"total_successful_designs\", \"total_deployment_successful_meaningful_sessions\", \"total_failed_design_meaningful_sessions\", \"total_successful_design_meaningful_sessions\", \"total_failed_design_short_sessions\", \"total_credit_proxy\", \"meaningful_session_ratio\", \"short_session_ratio\"}, {\"total_sessions\", \"total_usage_count\", \"total_session_duration\", \"average_session_duration\", \"min_session_duration\", \"max_session_duration\", \"total_errors\", \"total_effective_failed\", \"total_failed_sessions\", \"total_successful_sessions\", \"total_meaningful_sessions\", \"total_successful_meaningful_sessions\", \"total_failed_meaningful_sessions\", \"total_short_sessions\", \"total_failed_short_sessions\", \"total_successful_short_sessions\", \"total_AI_use\", \"total_successful_AI_use_sessions\", \"total_failed_AI_use_sessions\", \"total_AI_use_short_sessions\", \"total_successful_AI_short_sessions\", \"total_failed_AI_use_short_sessions\", \"total_AI_use_meaningful_sessions\", \"total_failed_AI_meaningful_short_sessions\", \"total_successful_AI_use_meaningful_sessions\", \"total_app_build_attempts\", \"total_successful_app_builds\", \"total_failed_app_builds\", \"total_app_build_short_session\", \"total_successful_app_short_sessions\", \"total_failed_app_short_sessions\", \"total_app_build_meaningful_sessions\", \"total_failed_app_meaningful_sessions\", \"total_successful_app_meaningful_sessions\", \"total_code_exports\", \"total_code_export_successful_sessions\", \"total_failed_code_export_sessions\", \"total_code_export_meaningful_sessions\", \"total_code_export_successful_meaningful_sessions\", \"total_code_export_failed_meaningful_sessions\", \"total_code_export_short_sessions\", \"total_code_export_successful_short_sessions\", \"total_code_export_failed_short_sessions\", \"total_deployments\", \"total_successful_deployments\", \"total_failed_deployments\", \"total_deployment_short_sessions\", \"total_deployment_successful_sessions\", \"total_deployment_failed_short_sessions\", \"total_meaningful_deployment_sessions\", \"total_successful_meaningful_deployment_sessions\", \"total_failed_meaningful_deployment_sessions\", \"total_designs\", \"total_designs_short_sessions\", \"total_design_meaningful_sessions\", \"total_failed_designs\", \"total_successful_designs\", \"total_deployment_successful_meaningful_sessions\", \"total_failed_design_meaningful_sessions\", \"total_successful_design_meaningful_sessions\", \"total_failed_design_short_sessions\", \"total_credit_proxy\", \"meaningful_session_ratio\", \"short_session_ratio\"}),",
+                "    #\"Expanded product\" = Table.ExpandTableColumn(#\"Merged Queries2\", \"product\", {\"total_sessions\", \"total_usage_count\", \"total_session_duration\", \"average_session_duration\", \"min_session_duration\", \"max_session_duration\", \"total_errors\", \"total_effective_failed\", \"total_failed_sessions\", \"total_successful_sessions\", \"total_meaningful_sessions\", \"total_successful_meaningful_sessions\", \"total_failed_meaningful_sessions\", \"total_short_sessions\", \"total_failed_short_sessions\", \"total_successful_short_sessions\", \"total_AI_use\", \"total_successful_AI_use_sessions\", \"total_failed_AI_use_sessions\", \"total_AI_use_short_sessions\", \"total_successful_AI_short_sessions\", \"total_failed_AI_use_short_sessions\", \"total_AI_use_meaningful_sessions\", \"total_failed_AI_meaningful_short_sessions\", \"total_successful_AI_use_meaningful_sessions\", \"total_app_build_attempts\", \"total_successful_app_builds\", \"total_failed_app_builds\", \"total_app_build_short_session\", \"total_successful_app_short_sessions\", \"total_failed_app_short_sessions\", \"total_app_build_meaningful_sessions\", \"total_failed_app_meaningful_sessions\", \"total_successful_app_meaningful_sessions\", \"total_code_exports\", \"total_code_export_successful_sessions\", \"total_failed_code_export_sessions\", \"total_code_export_meaningful_sessions\", \"total_code_export_successful_meaningful_sessions\", \"total_code_export_failed_meaningful_sessions\", \"total_code_export_short_sessions\", \"total_code_export_successful_short_sessions\", \"total_code_export_failed_short_sessions\", \"total_deployments\", \"total_successful_deployments\", \"total_failed_deployments\", \"total_deployment_short_sessions\", \"total_deployment_successful_sessions\", \"total_deployment_failed_short_sessions\", \"total_meaningful_deployment_sessions\", \"total_successful_meaningful_deployment_sessions\", \"total_failed_meaningful_deployment_sessions\", \"total_designs\", \"total_designs_short_sessions\", \"total_design_meaningful_sessions\", \"total_failed_designs\", \"total_successful_designs\", \"total_deployment_successful_meaningful_sessions\", \"total_failed_design_meaningful_sessions\", \"total_successful_design_meaningful_sessions\", \"total_failed_design_short_sessions\", \"total_credit_proxy\", \"meaningful_session_ratio\", \"short_session_ratio\", \"success_rate\", \"experience_level\", \"friction_ratio\", \"friction_level\"}, {\"total_sessions\", \"total_usage_count\", \"total_session_duration\", \"average_session_duration\", \"min_session_duration\", \"max_session_duration\", \"total_errors\", \"total_effective_failed\", \"total_failed_sessions\", \"total_successful_sessions\", \"total_meaningful_sessions\", \"total_successful_meaningful_sessions\", \"total_failed_meaningful_sessions\", \"total_short_sessions\", \"total_failed_short_sessions\", \"total_successful_short_sessions\", \"total_AI_use\", \"total_successful_AI_use_sessions\", \"total_failed_AI_use_sessions\", \"total_AI_use_short_sessions\", \"total_successful_AI_short_sessions\", \"total_failed_AI_use_short_sessions\", \"total_AI_use_meaningful_sessions\", \"total_failed_AI_meaningful_short_sessions\", \"total_successful_AI_use_meaningful_sessions\", \"total_app_build_attempts\", \"total_successful_app_builds\", \"total_failed_app_builds\", \"total_app_build_short_session\", \"total_successful_app_short_sessions\", \"total_failed_app_short_sessions\", \"total_app_build_meaningful_sessions\", \"total_failed_app_meaningful_sessions\", \"total_successful_app_meaningful_sessions\", \"total_code_exports\", \"total_code_export_successful_sessions\", \"total_failed_code_export_sessions\", \"total_code_export_meaningful_sessions\", \"total_code_export_successful_meaningful_sessions\", \"total_code_export_failed_meaningful_sessions\", \"total_code_export_short_sessions\", \"total_code_export_successful_short_sessions\", \"total_code_export_failed_short_sessions\", \"total_deployments\", \"total_successful_deployments\", \"total_failed_deployments\", \"total_deployment_short_sessions\", \"total_deployment_successful_sessions\", \"total_deployment_failed_short_sessions\", \"total_meaningful_deployment_sessions\", \"total_successful_meaningful_deployment_sessions\", \"total_failed_meaningful_deployment_sessions\", \"total_designs\", \"total_designs_short_sessions\", \"total_design_meaningful_sessions\", \"total_failed_designs\", \"total_successful_designs\", \"total_deployment_successful_meaningful_sessions\", \"total_failed_design_meaningful_sessions\", \"total_successful_design_meaningful_sessions\", \"total_failed_design_short_sessions\", \"total_credit_proxy\", \"meaningful_session_ratio\", \"short_session_ratio\", \"success_rate\", \"experience_level\", \"friction_ratio\", \"friction_level\"}),",
                 "    #\"Added Custom1\" = Table.AddColumn(#\"Expanded product\", \"app_build_focus\", each if [usage_frequency] = 0 or [total_app_build_attempts] = 0 then null else [usage_frequency] / [total_app_build_attempts]),",
                 "    #\"Added Custom2\" = Table.AddColumn(#\"Added Custom1\", \"deployment_focus\", each if [usage_frequency] = 0 or [total_deployments] = 0 then null else [total_deployments]/[usage_frequency]),",
                 "    #\"Added Custom3\" = Table.AddColumn(#\"Added Custom2\", \"design_focus\", each if [usage_frequency] = 0 or [total_designs] = 0 then null else [total_designs] / [usage_frequency]),",
@@ -2884,26 +2880,7 @@
                 "\telse if ai = max_ratio and ai > 0 then \"AI User\"",
                 "\telse if app = max_ratio and app > 0 then \"App Builder\"",
                 "\telse \"Hybrid\"),",
-                "    #\"Added Custom8\" = Table.AddColumn(#\"Added Custom7\", \"fail_rate\", each if [total_failed_sessions] = null or [usage_frequency] = 0 then null else [total_failed_sessions]/[usage_frequency]),",
-                "    #\"Added Custom9\" = Table.AddColumn(#\"Added Custom8\", \"success_rate\", each if [total_successful_sessions] = null or [usage_frequency] = 0 then null else [total_successful_sessions]/[usage_frequency]),",
-                "    #\"Added Custom10\" = Table.AddColumn(#\"Added Custom9\", \"error_rate\", each if [total_effective_failed] = null or [usage_frequency] = 0 then null else [total_effective_failed]/[usage_frequency]),",
-                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Added Custom10\",{{\"fail_rate\", type number}, {\"success_rate\", type number}, {\"error_rate\", type number}}),",
-                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Changed Type3\",{{\"error_rate\", Int64.Type}}),",
-                "    #\"Added Custom11\" = Table.AddColumn(#\"Changed Type4\", \"friction_level\", each if [error_rate] is null then \"null\"",
-                "else if [error_rate] = 0 then \"Flawless\"",
-                "else if [error_rate] >= 1 and [error_rate] <= 3 then \"Low Friction\"",
-                "else if [error_rate] >= 4 and [error_rate] <= 9 then \"High Friction\"",
-                "else if [error_rate] >= 10 then \"Broken\"",
-                "else \"N/A\"),",
-                "    #\"Rounded Off2\" = Table.TransformColumns(#\"Added Custom11\",{{\"fail_rate\", each Number.Round(_, 2), type number}, {\"success_rate\", each Number.Round(_, 2), type number}}),",
-                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Rounded Off2\",{{\"fail_rate\", Int64.Type}, {\"success_rate\", Int64.Type}}),",
-                "    #\"Added Custom12\" = Table.AddColumn(#\"Changed Type5\", \"frustration_level\", each if [fail_rate] is null then null",
-                "else if [fail_rate] = 0 then \"Clean\"",
-                "else if [fail_rate] >= 1 and [fail_rate] <= 2 then \"Minor Failure\"",
-                "else if [fail_rate] >= 3 and [fail_rate] <= 5 then \"Repeated Failure\"",
-                "else if [fail_rate] >= 6 then \"System Breakdown\"",
-                "else \"N/A\"),",
-                "    #\"Merged Queries3\" = Table.NestedJoin(#\"Added Custom12\", {\"user_id\"}, operations, {\"user_id\"}, \"operations\", JoinKind.LeftOuter),",
+                "    #\"Merged Queries3\" = Table.NestedJoin(#\"Added Custom7\", {\"user_id\"}, operations, {\"user_id\"}, \"operations\", JoinKind.LeftOuter),",
                 "    #\"Expanded operations\" = Table.ExpandTableColumn(#\"Merged Queries3\", \"operations\", {\"total_tickets\", \"total_responses_received\", \"total_resolved_tickets\", \"avg_satisfaction_rating\", \"min_satisfaction_rating\", \"max_satisfaction_rating\", \"total_ignored_tickets\", \"total_unresolved_tickets\", \"total_ignored_but_resolved_tickets\", \"total_ignored_and_unresolved_tickets\", \"total_responded_to_and_resolved_tickets\", \"total_responded_but_unresolved_tickets\", \"total_payment_tickets\", \"total_ignored_payment_tickets\", \"total_payments_responded_to\", \"total_unresolved_payment_tickets\", \"total_resolved_payment_tickets\", \"total_payment_tickets_ignored_and_unresolved\", \"total_payment_tickets_responded_and_resolved\", \"total_payment_tickets_responded_but_unresolved\", \"total_payment_tickets_ignored_but_resolved\", \"avg_satisfaction_rating_payment\", \"total_ui_tickets\", \"total_ignored_ui_tickets\", \"total_ui_tickets_responded_to\", \"total_resolved_ui_tickets\", \"total_unresolved_ui_tickets\", \"total_resolved_but_ignored_ui_tickets\", \"total_ui_ticket_responded_to_but_unresolved\", \"total_ui_tickets_ignored_and_unresolved\", \"total_ui_tickets_responded_to_and_resolved\", \"avg_satisfaction_rating_ui\", \"total_misprompt_tickets\", \"total_misprompts_responded_to\", \"total_ignored_misprompt_tickets\", \"total_resolved_misprompt_tickets\", \"total_unresolved_misprompt_tickets\", \"total_misprompts_ignored_but_resolved\", \"avg_satisfaction_rating_misprompt\", \"total_misprompts_responded_to_and_unresolved\", \"total_misprompts_ignored_and_unresponded_to\", \"total_misprompt_responded_to_and_resolved\", \"total_bug_tickets\", \"total_bug_tickets_responded_to\", \"total_resolved_bug_tickets\", \"total_ignored_bug_tickets\", \"total_unresolved_bug_tickets\", \"total_bug_tickets_ignored_but_resolved\", \"total_bug_tickets_responded_to_but_unresolved\", \"total_bug_tickets_ignored_and_unresolved\", \"total_bug_tickets_responded_to_and_resolved\", \"avg_satisfaction_rating_bug\", \"total_feature_request_tickets\", \"total_ignored_feature_request_tickets\", \"total_feature_request_tickets_responded_to\", \"total_feature_request_ignored_and_unresolved\", \"total_feature_request_responded_to_and_resolved\", \"total_resolved_feature_request_tickets\", \"total_unresolved_feature_request_tickets\", \"total_feature_request_ignored_but_resolved\", \"total_feature_request_responded_to_but_unresolved\", \"avg_satisfaction_rating_feature_request\"}, {\"total_tickets\", \"total_responses_received\", \"total_resolved_tickets\", \"avg_satisfaction_rating\", \"min_satisfaction_rating\", \"max_satisfaction_rating\", \"total_ignored_tickets\", \"total_unresolved_tickets\", \"total_ignored_but_resolved_tickets\", \"total_ignored_and_unresolved_tickets\", \"total_responded_to_and_resolved_tickets\", \"total_responded_but_unresolved_tickets\", \"total_payment_tickets\", \"total_ignored_payment_tickets\", \"total_payments_responded_to\", \"total_unresolved_payment_tickets\", \"total_resolved_payment_tickets\", \"total_payment_tickets_ignored_and_unresolved\", \"total_payment_tickets_responded_and_resolved\", \"total_payment_tickets_responded_but_unresolved\", \"total_payment_tickets_ignored_but_resolved\", \"avg_satisfaction_rating_payment\", \"total_ui_tickets\", \"total_ignored_ui_tickets\", \"total_ui_tickets_responded_to\", \"total_resolved_ui_tickets\", \"total_unresolved_ui_tickets\", \"total_resolved_but_ignored_ui_tickets\", \"total_ui_ticket_responded_to_but_unresolved\", \"total_ui_tickets_ignored_and_unresolved\", \"total_ui_tickets_responded_to_and_resolved\", \"avg_satisfaction_rating_ui\", \"total_misprompt_tickets\", \"total_misprompts_responded_to\", \"total_ignored_misprompt_tickets\", \"total_resolved_misprompt_tickets\", \"total_unresolved_misprompt_tickets\", \"total_misprompts_ignored_but_resolved\", \"avg_satisfaction_rating_misprompt\", \"total_misprompts_responded_to_and_unresolved\", \"total_misprompts_ignored_and_unresponded_to\", \"total_misprompt_responded_to_and_resolved\", \"total_bug_tickets\", \"total_bug_tickets_responded_to\", \"total_resolved_bug_tickets\", \"total_ignored_bug_tickets\", \"total_unresolved_bug_tickets\", \"total_bug_tickets_ignored_but_resolved\", \"total_bug_tickets_responded_to_but_unresolved\", \"total_bug_tickets_ignored_and_unresolved\", \"total_bug_tickets_responded_to_and_resolved\", \"avg_satisfaction_rating_bug\", \"total_feature_request_tickets\", \"total_ignored_feature_request_tickets\", \"total_feature_request_tickets_responded_to\", \"total_feature_request_ignored_and_unresolved\", \"total_feature_request_responded_to_and_resolved\", \"total_resolved_feature_request_tickets\", \"total_unresolved_feature_request_tickets\", \"total_feature_request_ignored_but_resolved\", \"total_feature_request_responded_to_but_unresolved\", \"avg_satisfaction_rating_feature_request\"}),",
                 "    #\"Added Custom13\" = Table.AddColumn(#\"Expanded operations\", \"usage_intensity\", each if [total_meaningful_sessions] is null or [total_short_sessions] is null then \"N/A\"",
                 "else if [total_meaningful_sessions] > [total_short_sessions] then \"Heavy User\"",
@@ -3149,7 +3126,7 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "int64",
+            "dataType": "double",
             "formatString": "0",
             "lineageTag": "d64c2489-fb5f-43cb-a89d-b8f95e8840ad",
             "sourceColumn": "errors",
@@ -3200,7 +3177,7 @@
                 "property": "IsHidden"
               }
             ],
-            "dataType": "decimal",
+            "dataType": "double",
             "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
             "isHidden": true,
             "lineageTag": "e46d4a4f-1305-409f-a2a9-7aca3deac4d1",
@@ -3334,7 +3311,10 @@
                 "    Source = Csv.Document(File.Contents(\"C:\\Users\\User\\Desktop\\Adora's CSVs\\feature_usage (1).csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
                 "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"user_id\", type text}, {\"feature_name\", type text}, {\"usage_count\", Int64.Type}, {\"session_duration\", type number}, {\"errors\", Int64.Type}}),",
-                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Changed Type\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
+                "    #\"Filtered Rows1\" = Table.SelectRows(#\"Changed Type\", each ([usage_count] <> null and [usage_count] <> 0)),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Filtered Rows1\",null,0,Replacer.ReplaceValue,{\"errors\"}),",
+                "    #\"Filtered Rows2\" = Table.SelectRows(#\"Replaced Value\", each ([session_duration] <> null)),",
+                "    #\"Merged Queries\" = Table.FuzzyNestedJoin(#\"Filtered Rows2\", {\"feature_name\"}, mapped_feature_usage, {\"corrected_feature_name\"}, \"mapped_feature_usage\", JoinKind.LeftOuter, [IgnoreCase=true, IgnoreSpace=true]),",
                 "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Merged Queries\",{\"user_id\", \"feature_name\", \"mapped_feature_usage\", \"usage_count\", \"session_duration\", \"errors\"}),",
                 "    #\"Expanded mapped_feature_usage\" = Table.ExpandTableColumn(#\"Reordered Columns\", \"mapped_feature_usage\", {\"corrected_feature_name\"}, {\"mapped_feature_usage.corrected_feature_name\"}),",
                 "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded mapped_feature_usage\",{\"feature_name\"}),",
@@ -3370,9 +3350,11 @@
                 "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Removed Duplicates\",{\"user_id\", \"dim_feature\", \"feature_usage\", \"usage_count\", \"session_duration\", \"errors\", \"production_ready_flag\", \"high_customization_flag\", \"credit_proxy_score\", \"prototype_built\", \"failed_apps_built\"}),",
                 "    #\"Expanded dim_feature\" = Table.ExpandTableColumn(#\"Reordered Columns1\", \"dim_feature\", {\"feature_usage_id\"}, {\"dim_feature.feature_usage_id\"}),",
                 "    #\"Renamed Columns3\" = Table.RenameColumns(#\"Expanded dim_feature\",{{\"dim_feature.feature_usage_id\", \"feature_usage_id\"}}),",
-                "    #\"Removed Columns3\" = Table.RemoveColumns(#\"Renamed Columns3\",{\"feature_usage\"})",
+                "    #\"Removed Columns3\" = Table.RemoveColumns(#\"Renamed Columns3\",{\"feature_usage\"}),",
+                "    #\"Changed Type8\" = Table.TransformColumnTypes(#\"Removed Columns3\",{{\"credit_proxy_score\", type number}}),",
+                "    #\"Rounded Off\" = Table.TransformColumns(#\"Changed Type8\",{{\"credit_proxy_score\", each Number.Round(_, 2), type number}})",
                 "in",
-                "    #\"Removed Columns3\""
+                "    #\"Rounded Off\""
               ],
               "type": "m"
             }
