@@ -626,7 +626,7 @@
           },
           {
             "name": "PBI_ResultType",
-            "value": "Table"
+            "value": "Exception"
           }
         ],
         "columns": [
@@ -3166,10 +3166,6 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"en-US\"}"
               }
             ],
             "changedProperties": [
@@ -3178,7 +3174,7 @@
               }
             ],
             "dataType": "double",
-            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "formatString": "#,0.00",
             "isHidden": true,
             "lineageTag": "e46d4a4f-1305-409f-a2a9-7aca3deac4d1",
             "sourceColumn": "credit_proxy_score",
@@ -3298,6 +3294,19 @@
             "lineageTag": "903f4042-9bb8-4630-806c-8265a65fae31",
             "summarizeBy": "none",
             "type": "calculated"
+          },
+          {
+            "name": "feature_usage",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "81e8735a-5ec3-4d97-a4dc-0ad3635643a3",
+            "sourceColumn": "feature_usage",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "279be595-a38a-4759-93e6-dd12793b461b",
@@ -3350,8 +3359,7 @@
                 "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Removed Duplicates\",{\"user_id\", \"dim_feature\", \"feature_usage\", \"usage_count\", \"session_duration\", \"errors\", \"production_ready_flag\", \"high_customization_flag\", \"credit_proxy_score\", \"prototype_built\", \"failed_apps_built\"}),",
                 "    #\"Expanded dim_feature\" = Table.ExpandTableColumn(#\"Reordered Columns1\", \"dim_feature\", {\"feature_usage_id\"}, {\"dim_feature.feature_usage_id\"}),",
                 "    #\"Renamed Columns3\" = Table.RenameColumns(#\"Expanded dim_feature\",{{\"dim_feature.feature_usage_id\", \"feature_usage_id\"}}),",
-                "    #\"Removed Columns3\" = Table.RemoveColumns(#\"Renamed Columns3\",{\"feature_usage\"}),",
-                "    #\"Changed Type8\" = Table.TransformColumnTypes(#\"Removed Columns3\",{{\"credit_proxy_score\", type number}}),",
+                "    #\"Changed Type8\" = Table.TransformColumnTypes(#\"Renamed Columns3\",{{\"credit_proxy_score\", type number}}),",
                 "    #\"Rounded Off\" = Table.TransformColumns(#\"Changed Type8\",{{\"credit_proxy_score\", each Number.Round(_, 2), type number}})",
                 "in",
                 "    #\"Rounded Off\""
